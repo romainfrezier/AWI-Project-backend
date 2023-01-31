@@ -1,11 +1,11 @@
-const Jeu = require('../models/Jeux');
+const Game = require('../models/Games');
 
-exports.createJeu = (req, res, next) => {
-    const jeu = new Jeu({
+exports.createGame = (req, res, next) => {
+    const game = new Game({
       nom: req.body.nom,
       type: req.body.type,
     });
-    jeu.save().then(
+    game.save().then(
       () => {
         res.status(201).json({
           message: 'Post saved successfully!'
@@ -20,15 +20,15 @@ exports.createJeu = (req, res, next) => {
     );
   };
 
-  exports.modifyJeu = (req, res, next) => {
-    const jeu = new Jeu({
+  exports.modifyGame = (req, res, next) => {
+    const game = new Game({
         nom: req.body.nom,
         type: req.body.type,
       });
-    Jeu.updateOne({_id: req.params.id}, jeu).then(
+    Game.updateOne({_id: req.params.id}, game).then(
       () => {
         res.status(201).json({
-          message: 'Jeu updated successfully!'
+          message: 'Game updated successfully!'
         });
       }
     ).catch(
@@ -40,8 +40,8 @@ exports.createJeu = (req, res, next) => {
     );
   };
 
-  exports.deleteJeu = (req, res, next) => {
-    Jeu.deleteOne({_id: req.params.id}).then(
+  exports.deleteGame = (req, res, next) => {
+    Game.deleteOne({_id: req.params.id}).then(
       () => {
         res.status(200).json({
           message: 'Deleted!'
@@ -56,12 +56,12 @@ exports.createJeu = (req, res, next) => {
     );
   };
 
-  exports.getOneJeu = (req, res, next) => {
-    Jeu.findOne({
+  exports.getOneGame = (req, res, next) => {
+    Game.findOne({
       _id: req.params.id
     }).then(
-      (jeu) => {
-        res.status(200).json(jeu);
+      (game) => {
+        res.status(200).json(game);
       }
     ).catch(
       (error) => {
@@ -72,10 +72,10 @@ exports.createJeu = (req, res, next) => {
     );
   };
 
-  exports.getAllJeux = (req, res, next) => {
-    Jeu.find().then(
-      (jeux) => {
-        res.status(200).json(jeux);
+  exports.getAllGames = (req, res, next) => {
+    Game.find().then(
+      (games) => {
+        res.status(200).json(games);
       }
     ).catch(
       (error) => {

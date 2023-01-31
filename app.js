@@ -5,7 +5,7 @@ const path = require('path');
 
 const affectationRoutes = require('./routes/affectations');
 const benevoleRoutes = require('./routes/benevoles');
-const jeuRoutes = require('./routes/jeux');
+const jeuRoutes = require('./routes/games');
 
 mongoose.connect(`mongodb+srv://${process.env.DB_URL}`, { useNewUrlParser: true, useUnifiedTopology: true, dbName: 'awi_project' })
     .then(() => console.log('Connection à MongoDB réussie'))
