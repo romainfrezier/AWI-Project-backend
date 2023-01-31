@@ -1,5 +1,4 @@
 const Affectation = require('../models/affectations');
-const fs = require('fs');
 
 exports.createAffectation = (req, res, next) => {
     const affectation = new Affectation({
