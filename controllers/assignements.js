@@ -1,14 +1,14 @@
-const Affectation = require('../models/affectations');
+const Assignement = require('../models/assignements');
 
-exports.createAffectation = (req, res, next) => {
-    const affectation = new Affectation({
+exports.createAssignement = (req, res, next) => {
+    const assignement = new Assignement({
       zone: req.body.zone,
       date_deb: req.body.date_deb,
       date_fin: req.body.date_fin,
       jeux: req.body.jeux,
       benevoles: req.body.benevoles
     });
-    affectation.save().then(
+    assignement.save().then(
       () => {
         res.status(201).json({
           message: 'Post saved successfully!'
@@ -23,18 +23,18 @@ exports.createAffectation = (req, res, next) => {
     );
   };
 
-  exports.modifyAffectation = (req, res, next) => {
-    const affectation = new Affectation({
+  exports.modifyAssignement = (req, res, next) => {
+    const assignement = new Assignement({
         zone: req.body.zone,
         date_deb: req.body.date_deb,
         date_fin: req.body.date_fin,
         jeux: req.body.jeux,
         benevoles: req.body.benevoles
       });
-    Affectation.updateOne({_id: req.params.id}, affectation).then(
+    Assignement.updateOne({_id: req.params.id}, assignement).then(
       () => {
         res.status(201).json({
-          message: 'Affectation updated successfully!'
+          message: 'Assignement updated successfully!'
         });
       }
     ).catch(
@@ -46,8 +46,8 @@ exports.createAffectation = (req, res, next) => {
     );
   };
 
-  exports.deleteAffectation = (req, res, next) => {
-    Affectation.deleteOne({_id: req.params.id}).then(
+  exports.deleteAssignement = (req, res, next) => {
+    Assignement.deleteOne({_id: req.params.id}).then(
       () => {
         res.status(200).json({
           message: 'Deleted!'
@@ -62,12 +62,12 @@ exports.createAffectation = (req, res, next) => {
     );
   };
 
-  exports.getOneAffectation = (req, res, next) => {
-    Affectation.findOne({
+  exports.getOneAssignement = (req, res, next) => {
+    Assignement.findOne({
       _id: req.params.id
     }).then(
-      (affectation) => {
-        res.status(200).json(affectation);
+      (assignement) => {
+        res.status(200).json(assignement);
       }
     ).catch(
       (error) => {
@@ -78,10 +78,10 @@ exports.createAffectation = (req, res, next) => {
     );
   };
 
-  exports.getAllAffectations = (req, res, next) => {
-    Affectation.find().then(
-      (affectations) => {
-        res.status(200).json(affectations);
+  exports.getAllAssignements = (req, res, next) => {
+    Assignement.find().then(
+      (assignements) => {
+        res.status(200).json(assignements);
       }
     ).catch(
       (error) => {

@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const affectationRoutes = require('./routes/affectations');
+const assignementRoutes = require('./routes/assignements');
 const volunteerRoutes = require('./routes/volunteers');
 const gameRoutes = require('./routes/games');
 
@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 
-app.use('/api/affectations', affectationRoutes);
+app.use('/api/assignements', assignementRoutes);
 app.use('/api/volunteers', volunteerRoutes);
 app.use('/api/games', gameRoutes);
 
