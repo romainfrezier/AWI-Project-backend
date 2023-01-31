@@ -3,13 +3,11 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 
-const affectationRoutes = require('./routes/affectations'); //TODO change it with correct routes
-//const userRoutes = require('./routes/user');
+const affectationRoutes = require('./routes/affectations');
+const benevoleRoutes = require('./routes/benevoles');
+const jeuRoutes = require('./routes/jeux');
 
-mongoose.connect(
-  "mongodb+srv:connectioncode", //TODO change it with the correct one
-  { useNewUrlParser: true, 
-    useUnifiedTopology: true })
+mongoose.connect(`mongodb+srv://${process.env.DB_URL}`, { useNewUrlParser: true, useUnifiedTopology: true, dbName: 'awi_project' })
     .then(() => console.log('Connection à MongoDB réussie'))
     .catch(() => console.log('Connection à MongoDB échouée'));
 
@@ -24,9 +22,8 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 
-//app.use('/images', express.static(path.join(__dirname, 'images')));
-
 app.use('/api/affectations', affectationRoutes);
-//app.use('/api/auth', userRoutes);
+app.use('/api/benevoles', benevoleRoutes);
+app.use('/api/jeux', jeuRoutes);
 
 module.exports = app;

@@ -1,5 +1,4 @@
 const Jeu = require('../models/Jeux');
-const fs = require('fs');
 
 exports.createJeu = (req, res, next) => {
     const jeu = new Jeu({
