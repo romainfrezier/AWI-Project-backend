@@ -1,12 +1,12 @@
-const Benevole = require('../models/benevoles.js');
+const Volunteer = require('../models/volunteers.js');
 
-exports.createBenevole = (req, res, next) => {
-    const benevole = new Benevole({
+exports.createVolunteer = (req, res, next) => {
+    const volunteer = new Volunteer({
         nom: req.body.nom,
         prenom: req.body.prenom,
         email: req.body.email
     });
-    benevole.save().then(
+    volunteer.save().then(
       () => {
         res.status(201).json({
           message: 'Volunteer saved successfully!'
@@ -21,13 +21,13 @@ exports.createBenevole = (req, res, next) => {
     );
   };
 
-  exports.modifyBenevole = (req, res, next) => {
-    const benevole = new Benevole({
+  exports.modifyVolunteer = (req, res, next) => {
+    const volunteer = new Volunteer({
         nom: req.body.nom,
         prenom: req.body.prenom,
         email: req.body.email
       });
-    Benevole.updateOne({_id: req.params.id}, benevole).then(
+    Volunteer.updateOne({_id: req.params.id}, volunteer).then(
       () => {
         res.status(201).json({
           message: 'Volunteer updated successfully!'
@@ -42,8 +42,8 @@ exports.createBenevole = (req, res, next) => {
     );
   };
 
-  exports.deleteBenevole = (req, res, next) => {
-    Benevole.deleteOne({_id: req.params.id}).then(
+  exports.deleteVolunteer = (req, res, next) => {
+    Volunteer.deleteOne({_id: req.params.id}).then(
       () => {
         res.status(200).json({
           message: 'Volunteer deleted successfully!'
@@ -58,12 +58,12 @@ exports.createBenevole = (req, res, next) => {
     );
   };
 
-  exports.getOneBenevole = (req, res, next) => {
-    Benevole.findOne({
+  exports.getOneVolunteer = (req, res, next) => {
+    Volunteer.findOne({
       _id: req.params.id
     }).then(
-      (benevole) => {
-        res.status(200).json(benevole);
+      (volunteer) => {
+        res.status(200).json(volunteer);
       }
     ).catch(
       (error) => {
@@ -74,10 +74,10 @@ exports.createBenevole = (req, res, next) => {
     );
   };
 
-  exports.getAllBenevoles = (req, res, next) => {
-    Benevole.find().then(
-      (benevoles) => {
-        res.status(200).json(benevoles);
+  exports.getAllVolunteers = (req, res, next) => {
+    Volunteer.find().then(
+      (volunteers) => {
+        res.status(200).json(volunteers);
       }
     ).catch(
       (error) => {
