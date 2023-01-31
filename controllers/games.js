@@ -1,4 +1,4 @@
-const Games = require('../models/Games');
+const Games = require('../models/games');
 
 exports.createGame = (req, res, next) => {
     const game = new Games({
