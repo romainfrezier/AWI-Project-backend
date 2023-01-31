@@ -6,6 +6,6 @@ const assignementsSchema = new mongoose.Schema({
     date_fin: { type: Date, required: true },
     jeux: {type: Array, required: true},
     benevoles: {type: Array, required: true}
-  }, { collection : 'assignements' });
+  }, { collection : 'affectations' });
 
-  module.exports = mongoose.model('Affecations', assignementsSchema);
+  module.exports = mongoose.model('Assignments', assignementsSchema);

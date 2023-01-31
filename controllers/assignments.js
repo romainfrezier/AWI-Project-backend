@@ -1,14 +1,14 @@
-const Assignement = require('../models/assignements');
+const Assignments = require('../models/assignments');
 
-exports.createAssignement = (req, res, next) => {
-    const assignement = new Assignement({
+exports.createAssignment = (req, res, next) => {
+    const assignment = new Assignments({
       zone: req.body.zone,
       date_deb: req.body.date_deb,
       date_fin: req.body.date_fin,
       jeux: req.body.jeux,
       benevoles: req.body.benevoles
     });
-    assignement.save().then(
+    assignment.save().then(
       () => {
         res.status(201).json({
           message: 'Post saved successfully!'
@@ -23,18 +23,18 @@ exports.createAssignement = (req, res, next) => {
     );
   };
 
-  exports.modifyAssignement = (req, res, next) => {
-    const assignement = new Assignement({
+  exports.modifyAssignment = (req, res, next) => {
+    const assignment = new Assignments({
         zone: req.body.zone,
         date_deb: req.body.date_deb,
         date_fin: req.body.date_fin,
         jeux: req.body.jeux,
         benevoles: req.body.benevoles
       });
-    Assignement.updateOne({_id: req.params.id}, assignement).then(
+    Assignments.updateOne({_id: req.params.id}, assignment).then(
       () => {
         res.status(201).json({
-          message: 'Assignement updated successfully!'
+          message: 'Assignment updated successfully!'
         });
       }
     ).catch(
@@ -46,8 +46,8 @@ exports.createAssignement = (req, res, next) => {
     );
   };
 
-  exports.deleteAssignement = (req, res, next) => {
-    Assignement.deleteOne({_id: req.params.id}).then(
+  exports.deleteAssignment = (req, res, next) => {
+    Assignments.deleteOne({_id: req.params.id}).then(
       () => {
         res.status(200).json({
           message: 'Deleted!'
@@ -62,12 +62,12 @@ exports.createAssignement = (req, res, next) => {
     );
   };
 
-  exports.getOneAssignement = (req, res, next) => {
-    Assignement.findOne({
+  exports.getOneAssignment = (req, res, next) => {
+    Assignments.findOne({
       _id: req.params.id
     }).then(
-      (assignement) => {
-        res.status(200).json(assignement);
+      (assignment) => {
+        res.status(200).json(assignment);
       }
     ).catch(
       (error) => {
@@ -78,10 +78,10 @@ exports.createAssignement = (req, res, next) => {
     );
   };
 
-  exports.getAllAssignements = (req, res, next) => {
-    Assignement.find().then(
-      (assignements) => {
-        res.status(200).json(assignements);
+  exports.getAllAssignments = (req, res, next) => {
+    Assignments.find().then(
+      (assignments) => {
+        res.status(200).json(assignments);
       }
     ).catch(
       (error) => {

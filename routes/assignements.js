@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const assignementsCtrl = require('../controllers/assignements');
+const assignementsCtrl = require('../controllers/assignments');
 
-router.post('/',assignementsCtrl.createAssignement);
-router.put('/:id',assignementsCtrl.modifyAssignement);
-router.delete('/:id', assignementsCtrl.deleteAssignement);
-router.get('/:id', assignementsCtrl.getOneAssignement);
-router.get('/', assignementsCtrl.getAllAssignements);
+router.post('/',assignementsCtrl.createAssignment);
+router.put('/:id',assignementsCtrl.modifyAssignment);
+router.delete('/:id', assignementsCtrl.deleteAssignment);
+router.get('/:id', assignementsCtrl.getOneAssignment);
+router.get('/', assignementsCtrl.getAllAssignments);
 
 module.exports = router;

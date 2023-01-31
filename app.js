@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 
-app.use('/api/assignements', assignementRoutes);
+app.use('/api/assignments', assignementRoutes);
 app.use('/api/volunteers', volunteerRoutes);
 app.use('/api/games', gameRoutes);
 

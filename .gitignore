@@ -309,4 +309,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+
+.firebase/
+.github/
 # End of https://www.toptal.com/developers/gitignore/api/node,macos,windows,appcode+iml,visualstudiocode

@@ -1,7 +1,7 @@
-const Volunteer = require('../models/volunteers.js');
+const Volunteers = require('../models/volunteers.js');
 
 exports.createVolunteer = (req, res, next) => {
-    const volunteer = new Volunteer({
+    const volunteer = new Volunteers({
         nom: req.body.nom,
         prenom: req.body.prenom,
         email: req.body.email
@@ -22,12 +22,12 @@ exports.createVolunteer = (req, res, next) => {
   };
 
   exports.modifyVolunteer = (req, res, next) => {
-    const volunteer = new Volunteer({
+    const volunteer = new Volunteers({
         nom: req.body.nom,
         prenom: req.body.prenom,
         email: req.body.email
       });
-    Volunteer.updateOne({_id: req.params.id}, volunteer).then(
+    Volunteers.updateOne({_id: req.params.id}, volunteer).then(
       () => {
         res.status(201).json({
           message: 'Volunteer updated successfully!'
@@ -43,7 +43,7 @@ exports.createVolunteer = (req, res, next) => {
   };
 
   exports.deleteVolunteer = (req, res, next) => {
-    Volunteer.deleteOne({_id: req.params.id}).then(
+    Volunteers.deleteOne({_id: req.params.id}).then(
       () => {
         res.status(200).json({
           message: 'Volunteer deleted successfully!'
@@ -59,7 +59,7 @@ exports.createVolunteer = (req, res, next) => {
   };
 
   exports.getOneVolunteer = (req, res, next) => {
-    Volunteer.findOne({
+    Volunteers.findOne({
       _id: req.params.id
     }).then(
       (volunteer) => {
@@ -75,7 +75,7 @@ exports.createVolunteer = (req, res, next) => {
   };
 
   exports.getAllVolunteers = (req, res, next) => {
-    Volunteer.find().then(
+    Volunteers.find().then(
       (volunteers) => {
         res.status(200).json(volunteers);
       }

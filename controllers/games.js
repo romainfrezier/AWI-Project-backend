@@ -1,7 +1,7 @@
-const Game = require('../models/Games');
+const Games = require('../models/Games');
 
 exports.createGame = (req, res, next) => {
-    const game = new Game({
+    const game = new Games({
       nom: req.body.nom,
       type: req.body.type,
     });
@@ -21,11 +21,11 @@ exports.createGame = (req, res, next) => {
   };
 
   exports.modifyGame = (req, res, next) => {
-    const game = new Game({
+    const game = new Games({
         nom: req.body.nom,
         type: req.body.type,
       });
-    Game.updateOne({_id: req.params.id}, game).then(
+    Games.updateOne({_id: req.params.id}, game).then(
       () => {
         res.status(201).json({
           message: 'Game updated successfully!'
@@ -41,7 +41,7 @@ exports.createGame = (req, res, next) => {
   };
 
   exports.deleteGame = (req, res, next) => {
-    Game.deleteOne({_id: req.params.id}).then(
+    Games.deleteOne({_id: req.params.id}).then(
       () => {
         res.status(200).json({
           message: 'Deleted!'
@@ -57,7 +57,7 @@ exports.createGame = (req, res, next) => {
   };
 
   exports.getOneGame = (req, res, next) => {
-    Game.findOne({
+    Games.findOne({
       _id: req.params.id
     }).then(
       (game) => {
@@ -73,7 +73,7 @@ exports.createGame = (req, res, next) => {
   };
 
   exports.getAllGames = (req, res, next) => {
-    Game.find().then(
+    Games.find().then(
       (games) => {
         res.status(200).json(games);
       }
