@@ -24,14 +24,13 @@ exports.createAssignment = (req, res, next) => {
   };
 
   exports.modifyAssignment = (req, res, next) => {
-    const assignment = new Assignments({
+    Assignments.findByIdAndUpdate(req.params.id, {
         zone: req.body.zone,
         date_deb: req.body.date_deb,
         date_fin: req.body.date_fin,
         jeux: req.body.jeux,
         benevoles: req.body.benevoles
-      });
-    Assignments.updateOne({_id: req.params.id}, assignment).then(
+    }).then(
       () => {
         res.status(201).json({
           message: 'Assignment updated successfully!'

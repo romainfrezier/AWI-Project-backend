@@ -22,12 +22,11 @@ exports.createVolunteer = (req, res, next) => {
   };
 
   exports.modifyVolunteer = (req, res, next) => {
-    const volunteer = new Volunteers({
+    Volunteers.findByIdAndUpdate(req.params.id, {
         nom: req.body.nom,
         prenom: req.body.prenom,
         email: req.body.email
-      });
-    Volunteers.updateOne({_id: req.params.id}, volunteer).then(
+    }).then(
       () => {
         res.status(201).json({
           message: 'Volunteer updated successfully!'

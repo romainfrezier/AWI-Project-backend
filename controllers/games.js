@@ -21,11 +21,10 @@ exports.createGame = (req, res, next) => {
   };
 
   exports.modifyGame = (req, res, next) => {
-    const game = new Games({
+    Games.findByIdAndUpdate(req.params.id, {
         nom: req.body.nom,
         type: req.body.type,
-      });
-    Games.updateOne({_id: req.params.id}, game).then(
+    }).then(
       () => {
         res.status(201).json({
           message: 'Game updated successfully!'
