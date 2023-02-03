@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const assignmentsSchema = new mongoose.Schema({
-    zone: { type: String, required: true },
+    zone: { type: Object, required: true },
     date_deb: { type: Date, required: true },
     date_fin: { type: Date, required: true },
-    jeux: {type: Array, required: true},
-    benevoles: {type: Array, required: true}
+    jeu: {type: Object, required: true},
+    benevole: {type: Object, required: true}
   }, { collection : 'affectations' });
 
   module.exports = mongoose.model('Assignments', assignmentsSchema);

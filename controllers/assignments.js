@@ -5,8 +5,15 @@ exports.createAssignment = (req, res, next) => {
       zone: req.body.zone,
       date_deb: req.body.date_deb,
       date_fin: req.body.date_fin,
-      jeux: req.body.jeux,
-      benevoles: req.body.benevoles
+        jeu: {
+            _id: req.body.jeu._id,
+            nom: req.body.jeu.nom,
+        },
+        benevole: {
+            _id: req.body.benevole._id,
+            nom: req.body.benevole.nom,
+            prenom: req.body.benevole.prenom
+        }
     });
     assignment.save().then(
       () => {
@@ -25,11 +32,21 @@ exports.createAssignment = (req, res, next) => {
 
   exports.modifyAssignment = (req, res, next) => {
     Assignments.findByIdAndUpdate(req.params.id, {
-        zone: req.body.zone,
+        zone: {
+            _id: req.body.zone._id,
+            nom: req.body.zone.nom
+        },
         date_deb: req.body.date_deb,
         date_fin: req.body.date_fin,
-        jeux: req.body.jeux,
-        benevoles: req.body.benevoles
+        jeu: {
+            _id: req.body.jeu._id,
+            nom: req.body.jeu.nom,
+        },
+        benevole: {
+            _id: req.body.benevole._id,
+            nom: req.body.benevole.nom,
+            prenom: req.body.benevole.prenom
+        }
     }).then(
       () => {
         res.status(201).json({
