@@ -107,3 +107,59 @@ exports.createAssignment = (req, res, next) => {
       }
     );
   };
+
+  exports.getAllStartingDates = (req, res, next) => {
+    Assignments.distinct("date_deb").then(
+      (dates) => {
+        res.status(200).json(dates)
+      }
+    ).catch(
+      (error) => {
+        res.status(400).json({
+          error: error
+        })
+      }
+    )
+  }
+
+  exports.getVolunteersWithDate = (req,res,next) => {
+    Assignments.aggregate([{$match:{date_deb: req.params.date_deb}},{$group:{_id:"$zone.nom", benevole:{$first:'$benevole'}}}]).then(
+      (benevoles) => {
+        res.status(200).json(benevoles)
+      }
+    ).catch(
+      (error) => {
+        res.status(400).json({
+          error: error
+        })
+      }
+    )
+  }
+
+  exports.getAllZones = (req,res,next) => {
+    Assignments.distinct("zone").then(
+      (zones) => {
+        res.status(200).json(zones)
+      }
+    ).catch(
+      (error)=> {
+        res.status(400).json({
+          error: error
+        })
+      }
+    )
+  }
+
+  exports.getVolunteersWithZone = (req,res,next) => {
+    Assignments.aggregate([{$match:{zone: req.params.zone}},{$group:{_id:"$date_deb", benevole:{$first:'$benevole'}}}]).then(
+      (benevoles) => {
+        res.status(200).json(benevoles)
+      }
+    ).catch(
+      (error) => {
+        res.status(400).json({
+          error: error
+        })
+      }
+    )
+  }

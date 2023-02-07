@@ -1,0 +1,7 @@
+dates deb de toutes les affectations => getAllDateDeb OK
+liste des bénévoles par zone pour une date début donnée (assignements) OK
+liste toutes les zones des affectations OK
+liste des bénévoles par date début pour une zone donnée 
+
+
+db.affectations.aggregate([{$match:{zone:{req.parmas.zone}}},{$group:{_id:"$date_deb", benevole:{$first:'$benevole'}}}])
