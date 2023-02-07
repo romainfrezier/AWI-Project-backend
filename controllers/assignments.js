@@ -123,7 +123,8 @@ exports.createAssignment = (req, res, next) => {
   }
 
   exports.getVolunteersWithDate = (req,res,next) => {
-    Assignments.aggregate([{$match:{"date_deb": req.params.date_deb}},{$group:{_id:"$zone.nom", benevole:{$first:'$benevole'}}}]).then(
+    let val = new Date(decodeURIComponent(req.params.date_deb))
+    Assignments.aggregate([{$match:{"date_deb": val}},{$group:{_id:"$zone.nom", benevole:{$first:'$benevole'}}}]).then(
       (benevoles) => {
         res.status(200).json(benevoles)
       }
