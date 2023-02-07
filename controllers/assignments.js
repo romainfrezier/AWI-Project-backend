@@ -123,7 +123,7 @@ exports.createAssignment = (req, res, next) => {
   }
 
   exports.getVolunteersWithDate = (req,res,next) => {
-    Assignments.aggregate([{$match:{date_deb: req.params.date_deb}},{$group:{_id:"$zone.nom", benevole:{$first:'$benevole'}}}]).then(
+    Assignments.aggregate([{$match:{"date_deb": req.params.date_deb}},{$group:{_id:"$zone.nom", benevole:{$first:'$benevole'}}}]).then(
       (benevoles) => {
         res.status(200).json(benevoles)
       }
@@ -151,7 +151,7 @@ exports.createAssignment = (req, res, next) => {
   }
 
   exports.getVolunteersWithZone = (req,res,next) => {
-    Assignments.aggregate([{$match:{zone: req.params.zone}},{$group:{_id:"$date_deb", benevole:{$first:'$benevole'}}}]).then(
+    Assignments.aggregate([{$match:{"zone._id": req.params.zone}},{$group:{_id:"$date_deb", benevole:{$first:'$benevole'}}}]).then(
       (benevoles) => {
         res.status(200).json(benevoles)
       }
