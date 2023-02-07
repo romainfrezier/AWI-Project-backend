@@ -136,7 +136,7 @@ exports.createAssignment = (req, res, next) => {
     )
   }
 
-  exports.getAllZones = (req,res,next) => {
+  exports.getAllAreas = (req,res,next) => {
     Assignments.distinct("zone").then(
       (zones) => {
         res.status(200).json(zones)
@@ -150,7 +150,7 @@ exports.createAssignment = (req, res, next) => {
     )
   }
 
-  exports.getVolunteersWithZone = (req,res,next) => {
+  exports.getVolunteersWithArea = (req,res,next) => {
     Assignments.aggregate([{$match:{"zone._id": req.params.zone}},{$group:{_id:"$date_deb", benevole:{$first:'$benevole'}}}]).then(
       (benevoles) => {
         res.status(200).json(benevoles)

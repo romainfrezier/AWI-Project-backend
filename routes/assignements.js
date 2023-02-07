@@ -9,8 +9,8 @@ router.delete('/:id', assignementsCtrl.deleteAssignment);
 router.get('/:id', assignementsCtrl.getOneAssignment);
 router.get('/', assignementsCtrl.getAllAssignments);
 router.get('/dates',assignementsCtrl.getAllStartingDates);
-router.get('/:date_deb',assignementsCtrl.getVolunteersWithDate);
-router.get('/zones',assignementsCtrl.getAllZones);
-router.get('/:zone',assignementsCtrl.getVolunteersWithZone);
+router.get('dates/:date_deb',assignementsCtrl.getVolunteersWithDate);
+router.get('/areas',assignementsCtrl.getAllAreas);
+router.get('areas/:zone',assignementsCtrl.getVolunteersWithArea);
 
 module.exports = router;
