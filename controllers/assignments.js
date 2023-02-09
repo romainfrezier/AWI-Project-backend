@@ -108,8 +108,8 @@ exports.createAssignment = (req, res, next) => {
     );
   };
 
-  exports.getAllStartingDates = (req, res, next) => {
-    Assignments.distinct("date_deb").then(
+  exports.getAllDates = (req, res, next) => {
+    Assignments.aggregate([{$group:{_id:{date_deb:"$date_deb",date_fin:"$date_fin"}}}]).then(
       (dates) => {
         res.status(200).json(dates)
       }
@@ -123,8 +123,9 @@ exports.createAssignment = (req, res, next) => {
   }
 
   exports.getVolunteersWithDate = (req,res,next) => {
-    let val = new Date(decodeURIComponent(req.params.date_deb))
-    Assignments.aggregate([{$match:{"date_deb": val}},{$group:{_id:"$zone.nom", benevole:{$first:'$benevole'}}}]).then(
+    let deb = new Date(decodeURIComponent(req.params.date_deb))
+    let fin = new Date(decodeURIComponent(req.params.date_fin))
+    Assignments.aggregate([{$match:{"date_deb": deb,"date_fin":fin}},{$group:{_id:"$zone.nom", benevole:{$first:'$benevole'}}}]).then(
       (benevoles) => {
         res.status(200).json(benevoles)
       }
@@ -152,7 +153,7 @@ exports.createAssignment = (req, res, next) => {
   }
 
   exports.getVolunteersWithArea = (req,res,next) => {
-    Assignments.aggregate([{$match:{"zone._id": req.params.zone}},{$group:{_id:"$date_deb", benevole:{$first:'$benevole'}}}]).then(
+    Assignments.aggregate([{$match:{"zone._id": req.params.zone}},{$group:{_id:{"date_deb":"$date_deb","date_fin":"$date_fin"}, benevole:{$first:'$benevole'}}}]).then(
       (benevoles) => {
         res.status(200).json(benevoles)
       }
