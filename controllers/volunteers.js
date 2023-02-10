@@ -1,4 +1,5 @@
 const Volunteers = require('../models/volunteers.js');
+const Assignments = require('../models/assignments.js');
 
 exports.createVolunteer = (req, res, next) => {
     const volunteer = new Volunteers({
@@ -41,20 +42,27 @@ exports.createVolunteer = (req, res, next) => {
     );
   };
 
-  exports.deleteVolunteer = (req, res, next) => {
-    Volunteers.deleteOne({_id: req.params.id}).then(
-      () => {
-        res.status(200).json({
-          message: 'Volunteer deleted successfully!'
-        });
-      }
-    ).catch(
-      (error) => {
-        res.status(400).json({
-          error: error
-        });
-      }
-    );
+  exports.deleteVolunteer = async (req, res, next) => {
+      Volunteers.deleteOne({_id: req.params.id}).then(
+          await Assignments.deleteMany({"benevole._id": req.params.id}).then(
+              () => {
+                  res.status(200).json({
+                      message: 'Assignment deleted successfully!'
+                  });
+              }
+          )).then(
+                () => {
+                    res.status(200).json({
+                        message: 'Volunteer deleted successfully!'
+                    });
+                }
+          ).catch(
+              (error) => {
+                  res.status(400).json({
+                      error: error
+                  });
+              }
+          );
   };
 
   exports.getOneVolunteer = (req, res, next) => {

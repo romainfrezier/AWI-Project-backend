@@ -1,4 +1,5 @@
 const Games = require('../models/games');
+const Assignment = require('../models/assignments');
 
 exports.createGame = (req, res, next) => {
     const game = new Games({
@@ -39,20 +40,27 @@ exports.createGame = (req, res, next) => {
     );
   };
 
-  exports.deleteGame = (req, res, next) => {
-    Games.deleteOne({_id: req.params.id}).then(
-      () => {
-        res.status(200).json({
-          message: 'Deleted!'
-        });
-      }
-    ).catch(
-      (error) => {
-        res.status(400).json({
-          error: error
-        });
-      }
-    );
+  exports.deleteGame = async (req, res, next) => {
+      Games.deleteOne({_id: req.params.id}).then(
+          await Assignment.deleteMany({"jeu._id": req.params.id}).then(
+              () => {
+                  res.status(200).json({
+                      message: 'Assignment deleted successfully!'
+                  });
+              }
+          )).then(
+          () => {
+              res.status(200).json({
+                  message: 'Game deleted successfully!'
+              });
+          }
+      ).catch(
+          (error) => {
+              res.status(400).json({
+                  error: error
+              });
+          }
+      );
   };
 
   exports.getOneGame = (req, res, next) => {

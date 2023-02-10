@@ -153,7 +153,7 @@ exports.createAssignment = (req, res, next) => {
   }
 
   exports.getVolunteersWithArea = (req,res,next) => {
-    Assignments.aggregate([{$match:{"zone._id": req.params.zone}},{$group:{_id:{"date_deb":"$date_deb","date_fin":"$date_fin"}, benevole:{$first:'$benevole'}}}]).then(
+    Assignments.aggregate([{$match:{"zone.nom": req.params.zone}},{$group:{_id:{"date_deb":"$date_deb","date_fin":"$date_fin"}, benevole:{$first:'$benevole'}}}]).then(
       (benevoles) => {
         res.status(200).json(benevoles)
       }
