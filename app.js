@@ -7,6 +7,7 @@ const assignmentRoutes = require('./routes/assignements');
 const volunteerRoutes = require('./routes/volunteers');
 const gameRoutes = require('./routes/games');
 const areaRoutes = require('./routes/areas')
+const admin = require('firebase-admin');
 
 const serviceAccount = {
     "type": `${process.env.TYPE}`,
