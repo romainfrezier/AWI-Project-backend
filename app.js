@@ -8,22 +8,19 @@ const volunteerRoutes = require('./routes/volunteers');
 const gameRoutes = require('./routes/games');
 const areaRoutes = require('./routes/areas')
 const admin = require('firebase-admin');
+const forge = require('node-forge');
+const privateKeyString = process.env.PRIVATE_KEY;
 
-const serviceAccount = {
-    "type": `${process.env.TYPE}`,
-    "project_id": `${process.env.PROJECT_ID}`,
-    "private_key_id": `${process.env.PRIVATE_KEY_ID}`,
-    "private_key": `-----BEGIN PRIVATE KEY-----\n${process.env.PRIVATE_KEY}\n-----END PRIVATE KEY-----\n`,
-    "client_email": `${process.env.CLIENT_EMAIL}`,
-    "client_id": `${process.env.CLIENT_ID}`,
-    "auth_uri": `${process.env.AUTH_URI}`,
-    "token_uri": `${process.env.TOKEN_URI}`,
-    "auth_provider_x509_cert_url": `${process.env.AUTH_PROVIDER_URL}`,
-    "client_x509_cert_url": `${process.env.CLIENT_CERT_URL}`
-}
+const privateKey = forge.pki.privateKeyFromPem(privateKeyString);
+
+const privateKeyPem = forge.pki.privateKeyToPem(privateKey);
 
 admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
+    credential: admin.credential.cert({
+      projectId: process.env.PROJECT_ID,
+      clientEmail: '<CLIENT_EMAIL>',
+      privateKey: privateKeyPem,
+    }),
   });
 
 mongoose.connect(`mongodb+srv://${process.env.DB_URL}`, { useNewUrlParser: true, useUnifiedTopology: true, dbName: process.env.DB_NAME })
