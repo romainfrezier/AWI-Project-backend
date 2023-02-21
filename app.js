@@ -18,7 +18,7 @@ const privateKeyPem = forge.pki.privateKeyToPem(privateKey);
 admin.initializeApp({
     credential: admin.credential.cert({
       projectId: process.env.PROJECT_ID,
-      clientEmail: '<CLIENT_EMAIL>',
+      clientEmail: process.env.CLIENT_EMAIL,
       privateKey: privateKeyPem,
     }),
   });
@@ -32,12 +32,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use('/assignments', assignmentRoutes);
-app.use('/volunteers', volunteerRoutes);
-app.use('/games', gameRoutes);
-app.use('/areas', areaRoutes)
-
-function checkAuth(req, res, next) {
+const checkAuth=(req, res, next) =>{
     if (req.headers.authtoken) {
       admin.auth().verifyIdToken(req.headers.authtoken)
         .then(() => {
@@ -50,6 +45,12 @@ function checkAuth(req, res, next) {
     }
 }
   
-app.use('/', checkAuth)
+app.use(checkAuth)
+
+app.use('/assignments', assignmentRoutes);
+app.use('/volunteers', volunteerRoutes);
+app.use('/games', gameRoutes);
+app.use('/areas', areaRoutes)
+
 
 module.exports = app;
