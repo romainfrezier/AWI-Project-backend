@@ -2,17 +2,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const admin = require('firebase-admin');
+const forge = require('node-forge');
 
 const assignmentRoutes = require('./routes/assignements');
 const volunteerRoutes = require('./routes/volunteers');
 const gameRoutes = require('./routes/games');
 const areaRoutes = require('./routes/areas')
-const admin = require('firebase-admin');
-const forge = require('node-forge');
+
 const privateKeyString = process.env.PRIVATE_KEY;
-
 const privateKey = forge.pki.privateKeyFromPem(privateKeyString);
-
 const privateKeyPem = forge.pki.privateKeyToPem(privateKey);
 
 admin.initializeApp({
@@ -23,34 +22,33 @@ admin.initializeApp({
     }),
   });
 
+const checkAuth=(req, res, next) => {
+    if (req.headers.authtoken) {
+        admin.auth().verifyIdToken(req.headers.authtoken)
+            .then(() => {
+                next()
+            }).catch(() => {
+            res.status(403).send('Unauthorized')
+        });
+    } else {
+        res.status(403).send('Unauthorized')
+    }
+}
+
+const app = express();
+
 mongoose.connect(`mongodb+srv://${process.env.DB_URL}`, { useNewUrlParser: true, useUnifiedTopology: true, dbName: process.env.DB_NAME })
     .then(() => console.log('Connecion to MongoDB successful!'))
     .catch(() => console.log('Connecion to MongoDB failed!'));
 
-const app = express();
-
 app.use(bodyParser.json());
 app.use(cors());
 
-const checkAuth=(req, res, next) =>{
-    if (req.headers.authtoken) {
-      admin.auth().verifyIdToken(req.headers.authtoken)
-        .then(() => {
-          next()
-        }).catch(() => {
-          res.status(403).send('Unauthorized')
-        });
-    } else {
-      res.status(403).send('Unauthorized')
-    }
-}
-  
 app.use(checkAuth)
 
 app.use('/assignments', assignmentRoutes);
 app.use('/volunteers', volunteerRoutes);
 app.use('/games', gameRoutes);
 app.use('/areas', areaRoutes)
-
 
 module.exports = app;
