@@ -4,6 +4,8 @@
 
 The AWI (Web Application and Interoperability) project is a project that we had to do during our 4th year of engineering school. The goal of this project is to create an REST API that will be used by a web app at the first semester, and by a mobile app at the second semester.
 
+**This is the backend part of the project.**
+
 ---
 
 ### Techlogies used
