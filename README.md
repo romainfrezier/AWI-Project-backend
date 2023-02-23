@@ -33,7 +33,7 @@ The AWI (Web Application and Interoperability) project is a project that we had 
 </a> 
 
 <a target="_blank" href="https://www.npmjs.com/">
-  <img alt="github link" src="https://img.shields.io/badge/npm-8.1.0-orange?style=for-the-badge&logo=npm">
+  <img alt="github link" src="https://img.shields.io/badge/npm-8.1.2-orange?style=for-the-badge&logo=npm">
 </a>
 
 ---
