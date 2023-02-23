@@ -1,1 +1,52 @@
-# AWI_Project
+# AWI Project - Backend
+
+### What is the project ?
+
+The AWI (Web Application and Interoperability) project is a project that we had to do during our 4th year of engineering school. The goal of this project is to create an REST API that will be used by a web app at the first semester, and by a mobile app at the second semester.
+
+---
+
+### Techlogies used
+
+<a target="_blank" href="https://nodejs.org/en/">
+  <img alt="github link" src="https://img.shields.io/badge/nodejs-16.13.2-orange?style=for-the-badge&logo=node.js"> 
+</a>
+
+<a target="_blank" href="https://expressjs.com/">
+  <img alt="github link" src="https://img.shields.io/badge/express-4.18.2-orange?style=for-the-badge&logo=express">
+</a>
+
+<a target="_blank" href="https://www.mongodb.com/">
+  <img alt="github link" src="https://img.shields.io/badge/mongodb-5.3.2-orange?style=for-the-badge&logo=mongodb">
+</a>
+
+<a target="_blank" href="https://mongoosejs.com/">
+  <img alt="github link" src="https://img.shields.io/badge/mongoose-6.9.0-orange?style=for-the-badge&logo=mongoose">
+</a>
+
+<a target="_blank" href="https://firebase.google.com/docs/admin/setup">
+  <img alt="github link" src="https://img.shields.io/badge/firebase admin-11.5.0-orange?style=for-the-badge&logo=firebase">
+</a> 
+
+<a target="_blank" href="https://firebase.google.com/docs/functions">
+  <img alt="github link" src="https://img.shields.io/badge/firebase functions-11.5.0-orange?style=for-the-badge&logo=firebase">
+</a> 
+
+<a target="_blank" href="https://www.npmjs.com/">
+  <img alt="github link" src="https://img.shields.io/badge/npm-8.1.0-orange?style=for-the-badge&logo=npm">
+</a>
+
+---
+
+### Links
+
+<a target="_blank" href="https://awi-project-868686.web.app">
+    <img alt="github link" src="https://img.shields.io/badge/web-web app-blue?style=for-the-badge&logo=googlechrome">
+</a>
+<a target="_blank" href="https://github.com/romainfrezier/AWI-project-frontend">
+    <img alt="github link" src="https://img.shields.io/badge/github-frontend git-red?style=for-the-badge&logo=github">
+</a>
+
+---
+
+© Romain FREZIER & Robin HERMET - Polytech Montpellier
