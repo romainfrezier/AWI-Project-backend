@@ -44,9 +44,7 @@ exports.createGame = (req, res, next) => {
       Games.deleteOne({_id: req.params.id}).then(
           await Assignment.deleteMany({"jeu._id": req.params.id}).then(
               () => {
-                  res.status(200).json({
-                      message: 'Assignment deleted successfully!'
-                  });
+                  console.log("Assignments deleted successfully!")
               }
           )).then(
           () => {
